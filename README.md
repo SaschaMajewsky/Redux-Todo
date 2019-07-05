@@ -3,7 +3,7 @@
 [Visit Frontend](http://www.todo.saschamajewsky.de)<br />
 [Visit Backend](https://apirestnodeexpressmongo.herokuapp.com/)
 <br />
-![](public/assets/workflow.gif)
+![](todo/public/assets/workflow.gif)
 
 A modern Frontend powered by JavaScript, React, React-Redux, Create-React-App and Axios.
 
