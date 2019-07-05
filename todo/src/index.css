@@ -94,7 +94,26 @@ code {
   background-size: 1rem 1rem;
   background-position: right 3px top 3px;
   width: 7%;
-  margin-bottom: 15%;
+  margin-bottom: 23%;
+  padding-left: 1%;
+}
+
+@media (max-width: 1220px) {
+  .close {
+    margin-bottom: 18%;
+    padding-left: 1%;
+  }
+}
+
+@media (max-width: 780px) {
+  .close {
+    margin-bottom: 14%;
+    padding-left: 1%;
+  }
+}
+
+.close:hover {
+  cursor: pointer;
 }
 
 .img {
