@@ -4,6 +4,7 @@ import { Redirect } from 'react-router-dom';
 
 import { addTodo, toggleTodoStatus, deleteTodo, loadTodos } from '../actions';
 import TodoList from '../components/TodoList';
+import taskBurner from './lava-lamp-preloader.svg';
 
 class TodoForm extends React.Component {
   constructor(props) {
@@ -50,32 +51,49 @@ class TodoForm extends React.Component {
     if (localStorage.getItem('user') === null) {
       return <Redirect to='/' />;
     }
+    const loading = this.props.loadingProps;
+    console.log('LOADING: ', this.props.loadingProps);
     return (
       <div className='form-container'>
-        <form className='md-form' onSubmit={this.addTodo}>
-          <input
-            type='text'
-            name='text'
-            value={this.state.text}
-            onChange={this.onInputChange}
-            id='exampleForm2'
-            className='form-control white-text todo-input'
-            autoComplete='off'
-            maxLength='14'
-            placeholder='Add Todo'
-            required
-          />
-          <button className='btn peach-gradient' type='submit'>
-            Add
-          </button>
-        </form>
-        <TodoList toggle={this.toggleTodo} delete={this.deleteATodo} />
+        {loading && (
+          <div className='burn-loader'>
+            <img src={taskBurner} alt='Moving animation of a flame.' />
+          </div>
+        )}
+        {loading && (
+          <span className='loading-text'> burning all of your done tasks</span>
+        )}
+        {!loading && (
+          <form className='md-form' onSubmit={this.addTodo}>
+            <input
+              type='text'
+              name='text'
+              value={this.state.text}
+              onChange={this.onInputChange}
+              id='exampleForm2'
+              className='form-control white-text todo-input'
+              autoComplete='off'
+              maxLength='14'
+              placeholder='Add Todo'
+              required
+            />
+            <button className='btn peach-gradient' type='submit'>
+              Add
+            </button>
+          </form>
+        )}
+        {!loading && (
+          <TodoList toggle={this.toggleTodo} delete={this.deleteATodo} />
+        )}
       </div>
     );
   }
 }
 
-const mapStateToProps = state => ({ todoProps: state.todoReducer.todos });
+const mapStateToProps = state => ({
+  todoProps: state.todoReducer.todos,
+  loadingProps: state.todoReducer.loadingTodos,
+});
 
 export default connect(
   mapStateToProps,
